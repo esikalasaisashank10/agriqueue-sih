@@ -1,6 +1,0 @@
-{
-  "name": "AgriQueue — Smart Procurement Queue & Waiting List",
-  "description": "Real-time crop procurement queue and automated waiting list system with dynamic multilingual localization, staggered gate arrival passes, and traffic prevention for farmers.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
