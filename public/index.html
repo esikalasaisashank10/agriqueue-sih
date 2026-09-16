@@ -121,28 +121,6 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .btn.gold:hover{background:#d5a41f}
 .btn.sm{padding:.35rem .75rem;font-size:.8rem;border-radius:6px;min-height:36px}
 
-/* ---------- simulation bar ---------- */
-.sim-bar{
-  background:#172a1e;color:#b2c7b5;font-size:.82rem;padding:.45rem 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-.sim-bar-in{
-  display:flex;align-items:center;gap:.8rem;justify-content:space-between;flex-wrap:wrap;
-}
-.sim-info{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-.sim-badge{
-  background:rgba(231,179,43,.18);color:var(--grain);font-weight:700;
-  padding:.2rem .55rem;border-radius:4px;font-size:.72rem;letter-spacing:.03em;text-transform:uppercase;
-  white-space:nowrap;
-}
-.sim-text{font-size:.8rem;color:#cfe0cd}
-.sim-controls{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
-.sim-select{
-  background:#0f2015;color:#fff;border:1px solid rgba(255,255,255,.25);
-  padding:.35rem .6rem;border-radius:6px;font-size:.8rem;font-weight:500;
-  max-width:100%;min-height:36px;
-}
-
 /* ---------- hero ---------- */
 .hero{padding:clamp(1.8rem,4.5vw,3.6rem) 0 1.8rem}
 .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center}
@@ -365,7 +343,7 @@ footer b{color:#fff;font-weight:600}
   align-items:center;justify-content:center;line-height:1;
 }
 
-/* persona toggle in phone */
+/* persona toggle in phone (Internal Real-Time Contention Engine) */
 .persona-switcher{
   background:#172e21;color:#d5e5d8;padding:.4rem .85rem;font-size:.76rem;
   display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.1);
@@ -527,13 +505,6 @@ footer b{color:#fff;font-weight:600}
    ========================================================= */
 @media (max-width: 680px) {
   .wrap{width:calc(100% - 1.5rem)}
-  
-  /* Top simulation bar on mobile */
-  .sim-bar{padding:.6rem 0}
-  .sim-bar-in{flex-direction:column;align-items:stretch;gap:.5rem}
-  .sim-controls{width:100%;flex-direction:column;align-items:stretch;gap:.4rem}
-  .sim-select{width:100%}
-  #quickContentionBtn{width:100%}
 
   /* Nav on mobile */
   .nav-in{height:58px}
@@ -625,23 +596,6 @@ footer b{color:#fff;font-weight:600}
 </style>
 </head>
 <body>
-
-<!-- Simulation Control Bar -->
-<div class="sim-bar">
-  <div class="wrap sim-bar-in">
-    <div class="sim-info">
-      <span class="sim-badge">Live System Mode</span>
-      <span class="sim-text">Real-time slot contention & anti-overcrowding queue engine</span>
-    </div>
-    <div class="sim-controls">
-      <select class="sim-select" id="simPersonaSelect" aria-label="Select farmer profile">
-        <option value="ravi">Farmer 1: Ravi Kumar (Registered 42.5 qtl)</option>
-        <option value="suresh">Farmer 2: Suresh Reddy (Booking Contention)</option>
-      </select>
-      <button class="btn gold sm" id="quickContentionBtn">Test 2-Farmer Contention</button>
-    </div>
-  </div>
-</div>
 
 <!-- Header Navigation -->
 <nav class="nav">
@@ -740,7 +694,7 @@ footer b{color:#fff;font-weight:600}
         <h3>Real-time slot contention & automated waiting list active</h3>
         <p>When a farmer claims the final spot in a time band, subsequent farmers are immediately placed on the <b>Waiting List</b> and instructed by SMS <b>not to travel to the mandi</b>. If a cancellation or no-show occurs, the waitlist auto-promotes the next farmer in FIFO order.</p>
       </div>
-      <button class="btn sm ghost" data-open-app>Test slot collision</button>
+      <button class="btn sm ghost" data-open-app>Book a slot (Live demo)</button>
     </div>
   </div>
 
@@ -941,6 +895,7 @@ footer b{color:#fff;font-weight:600}
         <span id="netLabel">4G · AgriQueue Live</span>
       </div>
 
+      <!-- Internal Slot Contention & Persona Switcher -->
       <div class="persona-switcher">
         <span>Testing as: <strong id="activePersonaName">Ravi Kumar</strong></span>
         <button class="persona-btn" id="togglePersonaBtn">Switch to Suresh</button>
@@ -1095,7 +1050,7 @@ footer b{color:#fff;font-weight:600}
           <button class="app-btn sec" id="simulateAdvanceBtn">Simulate weighment completion</button>
         </div>
 
-        <!-- Screen 4B: Waiting List Screen (for person who picked when full) -->
+        <!-- Screen 4B: Waiting List Screen (Internal automated waitlist) -->
         <div class="screen" data-s="4b">
           <div class="app-token waitlist-mode">
             <small style="color:#ffd866">Karimnagar PPC · Slot 10:30–11:30</small>
@@ -1156,24 +1111,24 @@ footer b{color:#fff;font-weight:600}
 
     <!-- Side instructions on Laptop / Desktop -->
     <div class="side" id="sidePanel">
-      <h3>Live Contention Simulator</h3>
-      <p>Test how AgriQueue resolves slot contention and prevents mandi gate traffic jams in real time.</p>
+      <h3>Internal Contention Engine</h3>
+      <p>How AgriQueue manages real-time slot contention and waiting lists internally without external banners.</p>
       
       <div class="side-card">
-        <b>Current Scenario:</b>
-        <p id="sideScenarioText">Slot 10:30–11:30 has only 1 opening remaining at Karimnagar PPC. If Farmer 1 books it, Farmer 2 is automatically routed to the Waiting List.</p>
+        <b>Current Internal State:</b>
+        <p id="sideScenarioText">Slot 10:30–11:30 has 1 opening at Karimnagar PPC. When Farmer 1 books it, any subsequent farmer is automatically routed to the internal Waiting List.</p>
       </div>
 
       <ol id="sideSteps">
-        <li class="at">Choose language & profile</li>
-        <li>Farmer 1 books last slot</li>
-        <li>Farmer 2 tries same slot (Waitlist)</li>
-        <li>Anti-crowd advisory issued</li>
-        <li>Officer releases slot / auto-promotes</li>
-        <li>Gate pass issued to waitlist</li>
+        <li class="at">Choose language & sign in</li>
+        <li>Farmer 1 books last opening</li>
+        <li>Farmer 2 attempts same slot (Waitlist)</li>
+        <li>Anti-crowd stay-home advisory issued</li>
+        <li>Officer releases no-show slot</li>
+        <li>Automatic waitlist promotion & gate pass</li>
       </ol>
 
-      <button class="btn gold sm" id="sideQuickRunBtn" style="margin-top:1rem;width:100%">Run 2-Farmer Collision Test</button>
+      <button class="btn gold sm" id="sideQuickRunBtn" style="margin-top:1rem;width:100%">Run Internal Collision Demo</button>
       <button class="close" id="closeApp">Close demo overlay</button>
     </div>
   </div>
@@ -1576,8 +1531,6 @@ footer b{color:#fff;font-weight:600}
 
   function setPersona(p){
     AgriState.activePersona = p;
-    var select = document.getElementById("simPersonaSelect");
-    if (select) select.value = p;
 
     var pName = document.getElementById("activePersonaName");
     var toggleBtn = document.getElementById("togglePersonaBtn");
@@ -1697,9 +1650,6 @@ footer b{color:#fff;font-weight:600}
   document.getElementById("togglePersonaBtn").addEventListener("click", function(){
     setPersona(AgriState.activePersona === "ravi" ? "suresh" : "ravi");
   });
-  document.getElementById("simPersonaSelect").addEventListener("change", function(e){
-    setPersona(e.target.value);
-  });
 
   document.getElementById("sendOtp").addEventListener("click", function(){
     document.getElementById("otpBlock").style.display = "block";
@@ -1797,13 +1747,13 @@ footer b{color:#fff;font-weight:600}
     document.body.style.overflow = "hidden";
     setPersona("ravi");
     go(3);
-    showToast("Test Step 1: Farmer 1 (Ravi) selecting last opening for 10:30–11:30...", "SIMULATOR");
+    showToast("Test Step 1: Farmer 1 (Ravi) selecting last opening for 10:30–11:30...", "INTERNAL SIM");
 
     setTimeout(function(){
       document.getElementById("confirmSlotBtn").click();
 
       setTimeout(function(){
-        showToast("Test Step 2: Switching to Farmer 2 (Suresh) attempting same slot...", "SIMULATOR");
+        showToast("Test Step 2: Switching to Farmer 2 (Suresh) attempting same slot...", "INTERNAL SIM");
         setPersona("suresh");
         go(3);
 
@@ -1816,8 +1766,8 @@ footer b{color:#fff;font-weight:600}
     }, 1500);
   }
 
-  document.getElementById("quickContentionBtn").addEventListener("click", runTwoFarmerContentionTest);
-  document.getElementById("sideQuickRunBtn").addEventListener("click", runTwoFarmerContentionTest);
+  var sideRunBtn = document.getElementById("sideQuickRunBtn");
+  if (sideRunBtn) sideRunBtn.addEventListener("click", runTwoFarmerContentionTest);
 
   setPersona("ravi");
   applyLanguage("en");
